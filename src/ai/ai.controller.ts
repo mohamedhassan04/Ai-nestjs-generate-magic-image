@@ -10,4 +10,9 @@ export class AiController {
   async generateImageWithAi(@Body() aiDto: AiDto) {
     return await this.aiService.generateImageWithAi(aiDto);
   }
+
+  @Post('/generateImageWithAiFilm')
+  async generateImageWithAiFilm(@Body() aiDto: AiDto) {
+    return await this.aiService.generateImageWithAiFilm(aiDto);
+  }
 }

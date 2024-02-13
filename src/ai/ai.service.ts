@@ -30,4 +30,37 @@ export class AiService {
     );
     return output;
   }
+
+  async generateImageWithAiFilm(aiDto: AiDto) {
+    const output = await this.replicate.run(
+      'zsxkib/instant-id:6af8583c541261472e92155d87bba80d5ad98461665802f2ba196ac099aaedc9',
+      {
+        input: {
+          image: aiDto.base64_img,
+          width: 640,
+          height: 640,
+          prompt: aiDto.prompt,
+          scheduler: 'EulerDiscreteScheduler',
+          enable_lcm: false,
+          sdxl_weights: 'protovision-xl-high-fidel',
+          pose_strength: 0.4,
+          canny_strength: 0.3,
+          depth_strength: 0.5,
+          guidance_scale: 5,
+          negative_prompt:
+            '(lowres, low quality, worst quality:1.2), (text:1.2), watermark, painting, drawing, illustration, glitch, deformed, mutated, cross-eyed, ugly, disfigured (lowres, low quality, worst quality:1.2), (text:1.2), watermark, painting, drawing, illustration, glitch,deformed, mutated, cross-eyed, ugly, disfigured',
+          ip_adapter_scale: 0.8,
+          lcm_guidance_scale: 1.5,
+          num_inference_steps: 30,
+          enable_pose_controlnet: true,
+          enhance_nonface_region: true,
+          enable_canny_controlnet: false,
+          enable_depth_controlnet: false,
+          lcm_num_inference_steps: 5,
+          controlnet_conditioning_scale: 0.8,
+        },
+      },
+    );
+    return output;
+  }
 }
